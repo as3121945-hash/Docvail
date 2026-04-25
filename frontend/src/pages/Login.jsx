@@ -4,7 +4,8 @@ import { useAuth } from '../hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { HeartPulse, ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
+import DocvailLogo from '../components/DocvailLogo';
 
 const loginSchema = z.object({
   identifier: z.string().min(1, 'Please enter your email or mobile number'),
@@ -106,7 +107,7 @@ const Login = () => {
           </Link>
           <div className="flex items-center justify-center sm:justify-end">
              <div className="bg-healthGreen-500 p-1.5 rounded-md shadow-sm mr-2">
-               <HeartPulse className="h-5 w-5 text-white" />
+               <DocvailLogo className="h-5 w-5 text-white" />
              </div>
              <span className="font-extrabold text-xl text-gray-900">Docvail</span>
           </div>

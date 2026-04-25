@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { HeartPulse, Mail, Phone, MapPin, Globe } from 'lucide-react';
+import { Mail, Phone, MapPin, Globe } from 'lucide-react';
+import DocvailLogo from './DocvailLogo';
 
 const Footer = () => {
   return (
@@ -11,7 +12,7 @@ const Footer = () => {
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-2">
               <div className="bg-healthGreen-500 p-2 rounded-xl">
-                <HeartPulse className="h-6 w-6 text-white" />
+                <DocvailLogo className="h-6 w-6 text-white" />
               </div>
               <span className="text-2xl font-bold text-white tracking-tight">Docvail</span>
             </Link>

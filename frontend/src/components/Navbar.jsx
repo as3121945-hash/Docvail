@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { HeartPulse, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import DocvailLogo from './DocvailLogo';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -29,7 +30,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center group">
               <div className="bg-healthGreen-500 p-2 rounded-lg group-hover:bg-healthGreen-600 transition-colors shadow-sm">
-                <HeartPulse className="h-6 w-6 text-white" />
+                <DocvailLogo className="h-6 w-6 text-white" />
               </div>
               <span className="ml-3 font-extrabold text-2xl tracking-tight text-gray-900 group-hover:text-healthGreen-700 transition-colors">Docvail</span>
             </Link>
