@@ -7,10 +7,15 @@ exports.analyzeSymptoms = async (req, res) => {
     return res.status(400).json({ msg: 'Please provide some text to analyze' });
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  // Robust key detection
+  const apiKey = (process.env.GEMINI_API_KEY || process.env.GEMINI_API || process.env.VITE_GEMINI_API_KEY || '').trim();
 
   if (!apiKey) {
-    return res.status(500).json({ msg: 'AI Service configuration missing. Please add GEMINI_API_KEY to .env' });
+    console.error('CRITICAL: GEMINI_API_KEY is missing from environment variables!');
+    return res.status(500).json({ 
+      msg: 'AI Service configuration missing on server.',
+      tip: 'Please check Render Dashboard -> Environment -> GEMINI_API_KEY'
+    });
   }
 
   try {
