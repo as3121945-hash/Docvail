@@ -29,9 +29,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center group">
-              <div className="bg-healthGreen-500 p-2 rounded-lg group-hover:bg-healthGreen-600 transition-colors shadow-sm">
-                <DocvailLogo className="h-6 w-6 text-white" />
-              </div>
+              <DocvailLogo className="h-9 w-9" />
               <span className="ml-3 font-extrabold text-2xl tracking-tight text-gray-900 group-hover:text-healthGreen-700 transition-colors">Docvail</span>
             </Link>
             <div className="hidden md:ml-10 md:flex md:space-x-8">

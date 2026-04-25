@@ -11,9 +11,7 @@ const Footer = () => {
           {/* Brand Col */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-2">
-              <div className="bg-healthGreen-500 p-2 rounded-xl">
-                <DocvailLogo className="h-6 w-6 text-white" />
-              </div>
+              <DocvailLogo className="h-9 w-9" />
               <span className="text-2xl font-bold text-white tracking-tight">Docvail</span>
             </Link>
             <p className="text-healthGreen-200 text-sm leading-relaxed max-w-xs">

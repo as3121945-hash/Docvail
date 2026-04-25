@@ -106,9 +106,7 @@ const Login = () => {
             <ArrowLeft className="w-4 h-4 mr-1" /> Back to Home
           </Link>
           <div className="flex items-center justify-center sm:justify-end">
-             <div className="bg-healthGreen-500 p-1.5 rounded-md shadow-sm mr-2">
-               <DocvailLogo className="h-5 w-5 text-white" />
-             </div>
+             <DocvailLogo className="h-8 w-8 mr-2" />
              <span className="font-extrabold text-xl text-gray-900">Docvail</span>
           </div>
         </div>
