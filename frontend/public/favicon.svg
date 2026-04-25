@@ -1,9 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <!-- Green rounded background -->
-  <rect width="64" height="64" rx="16" fill="#16a34a"/>
-  <!-- Heart with pulse line (Docvail logo mark) -->
-  <!-- Heart shape -->
-  <path d="M32 48 C32 48 14 36 14 24 C14 18 18.5 14 24 14 C27.5 14 30.5 15.8 32 18.5 C33.5 15.8 36.5 14 40 14 C45.5 14 50 18 50 24 C50 36 32 48 32 48Z" fill="white" opacity="0.95"/>
-  <!-- Pulse line across heart -->
-  <polyline points="18,26 23,26 26,20 29,32 33,22 36,28 40,28 46,28" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- White background -->
+  <rect width="64" height="64" rx="12" fill="white"/>
+  <!-- Outer cross shape (thick green) -->
+  <!-- Vertical bar outer -->
+  <rect x="22" y="4" width="20" height="56" rx="10" fill="#4ade80"/>
+  <!-- Horizontal bar outer -->
+  <rect x="4" y="22" width="56" height="20" rx="10" fill="#4ade80"/>
+  <!-- Inner cutout vertical (white channel) -->
+  <rect x="27.5" y="4" width="9" height="56" rx="4.5" fill="white"/>
+  <!-- Inner cutout horizontal (white channel) -->
+  <rect x="4" y="27.5" width="56" height="9" rx="4.5" fill="white"/>
+  <!-- Center intersection fill (where the two bars cross, re-fill green) -->
+  <rect x="22" y="22" width="20" height="20" fill="#4ade80"/>
+  <!-- Center intersection inner white (cross center hole) -->
+  <rect x="27.5" y="27.5" width="9" height="9" fill="white"/>
 </svg>
