@@ -73,7 +73,8 @@ const SearchDoctors = () => {
       fetchDoctors(detectedCity, detectedSpecialty);
     } catch (err) {
       console.error('AI analysis failed:', err);
-      alert('AI Assistant is unavailable. Please search manually.');
+      const errorMsg = err.response?.data?.msg || 'AI Assistant is unavailable';
+      alert(`${errorMsg}. Please search manually.`);
     } finally {
       setIsAiLoading(false);
     }
