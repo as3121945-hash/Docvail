@@ -20,9 +20,15 @@ exports.analyzeSymptoms = async (req, res) => {
 
   try {
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash",
-    });
+    // Try flash-latest first as it is the most robust name for new keys
+    let model;
+    try {
+      model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      await model.generateContent("ping");
+    } catch (e) {
+      console.warn("Standard flash failed, trying pro...");
+      model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    }
 
     const prompt = `You are a medical symptom analyzer for Docvail.
 Analyze the following user's input (which may be in English, Hindi, or Hinglish) and extract the intended medical specialty and city.
@@ -74,8 +80,9 @@ exports.checkStatus = async (req, res) => {
 
   try {
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-    await model.generateContent("ping"); // Quick test call
+    // Use the older gemini-pro for the health check as it is the most widely available
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    await model.generateContent("ping");
     
     res.json({ 
       status: 'OK', 
