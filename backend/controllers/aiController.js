@@ -74,15 +74,25 @@ exports.checkStatus = async (req, res) => {
   try {
     const genAI = new GoogleGenerativeAI(apiKey);
     
-    // NEW: List all available models to see what this key can actually do
+    // 1. List available models
     const modelsResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
     const modelsData = await modelsResponse.json();
-    
     const availableModels = modelsData.models ? modelsData.models.map(m => m.name.replace('models/', '')) : [];
+
+    // 2. Perform a TEST analysis to see the output format
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const testPrompt = `You are a medical symptom analyzer. Return ONLY a JSON object with keys "specialty" and "city" for this input: "sine m dard ho rha h"`;
+    const testResult = await model.generateContent(testPrompt);
+    const testResponse = await testResult.response;
+    const testOutput = testResponse.text().replace(/```json|```/gi, '').trim();
 
     res.json({ 
       status: 'DIAGNOSTIC', 
-      message: 'Scanning available models for your key...',
+      message: 'Scanning system...',
+      testAnalysis: {
+        input: "sine m dard ho rha h",
+        output: JSON.parse(testOutput)
+      },
       availableModels,
       ...status 
     });
