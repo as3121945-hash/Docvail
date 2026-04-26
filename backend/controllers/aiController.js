@@ -53,3 +53,41 @@ Input: "${text}"`;
     res.status(500).json({ msg: errorMsg, details: err.message });
   }
 };
+
+exports.checkStatus = async (req, res) => {
+  const apiKey = (process.env.GEMINI_API_KEY || process.env.GEMINI_API || '').trim();
+  
+  const status = {
+    envKeyDetected: !!apiKey,
+    keyLength: apiKey ? apiKey.length : 0,
+    nodeVersion: process.version,
+    timestamp: new Date().toISOString()
+  };
+
+  if (!apiKey) {
+    return res.status(500).json({ 
+      status: 'FAIL', 
+      message: 'No API key detected in environment variables.',
+      ...status 
+    });
+  }
+
+  try {
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    await model.generateContent("ping"); // Quick test call
+    
+    res.json({ 
+      status: 'OK', 
+      message: 'AI Service is connected and responding.',
+      ...status 
+    });
+  } catch (err) {
+    res.status(500).json({ 
+      status: 'ERROR', 
+      message: 'API Key found but Google rejected the connection.',
+      error: err.message,
+      ...status 
+    });
+  }
+};
