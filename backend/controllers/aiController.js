@@ -80,19 +80,23 @@ exports.checkStatus = async (req, res) => {
 
   try {
     const genAI = new GoogleGenerativeAI(apiKey);
-    // Use the older gemini-pro for the health check as it is the most widely available
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-    await model.generateContent("ping");
     
+    // NEW: List all available models to see what this key can actually do
+    const modelsResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+    const modelsData = await modelsResponse.json();
+    
+    const availableModels = modelsData.models ? modelsData.models.map(m => m.name.replace('models/', '')) : [];
+
     res.json({ 
-      status: 'OK', 
-      message: 'AI Service is connected and responding.',
+      status: 'DIAGNOSTIC', 
+      message: 'Scanning available models for your key...',
+      availableModels,
       ...status 
     });
   } catch (err) {
     res.status(500).json({ 
       status: 'ERROR', 
-      message: 'API Key found but Google rejected the connection.',
+      message: 'Failed to scan models.',
       error: err.message,
       ...status 
     });
