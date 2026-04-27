@@ -4,7 +4,11 @@ exports.getDoctors = async (req, res) => {
   const { city, specialty, hospital, page = 1, limit = 10 } = req.query;
   let query = {};
   if (city) query.city = { $regex: city, $options: 'i' };
-  if (specialty) query.specialty = { $regex: specialty, $options: 'i' };
+  if (specialty) {
+    // If user/AI sends "Cardiology", match "Cardiologist" by taking the root
+    const rootSearch = specialty.replace(/ology$/i, '').replace(/ist$/i, '');
+    query.specialty = { $regex: rootSearch, $options: 'i' };
+  }
   if (hospital) query.hospital = hospital;
 
   const doctors = await Doctor.find(query)

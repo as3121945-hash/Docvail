@@ -25,9 +25,16 @@ exports.analyzeSymptoms = async (req, res) => {
 
     const prompt = `You are a medical symptom analyzer for Docvail.
 Analyze the following user's input (which may be in English, Hindi, or Hinglish) and extract the intended medical specialty and city.
-Return ONLY a valid JSON object with keys "specialty" and "city".
-If a specialty cannot be clearly identified, default to 'General Physician'.
-If a city cannot be identified, return an empty string for city.
+
+CRITICAL RULES:
+1. Return ONLY a valid JSON object with keys "specialty" and "city".
+2. Use 'Specialist' names (e.g., Cardiologist, Dermatologist, Pediatrician, Gynecologist, Ophthalmologist) instead of fields (e.g., Cardiology, Dermatology).
+3. If a specialty is unclear, use 'General Physician'.
+4. If a city is not found, return "".
+
+Examples: 
+"sine m dard h" -> {"specialty": "Cardiologist", "city": ""}
+"skin rash in Delhi" -> {"specialty": "Dermatologist", "city": "Delhi"}
 
 Input: "${text}"`;
 
